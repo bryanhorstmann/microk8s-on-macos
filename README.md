@@ -16,9 +16,11 @@ https://microk8s.io/docs/install-macos
 
 
 ## Multipass
+```
 multipass set client.primary-name=microk8s-vm
 multipass list
 multipass shell
+```
 
 ## Networking
 ```
