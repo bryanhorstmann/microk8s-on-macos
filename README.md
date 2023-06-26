@@ -1,13 +1,26 @@
-# Installation
+# MicroK8s on MacOS
+A useful guide for getting MicroK8s running on MacOS and allowing access to the services from your network
+
+<!-- toc -->
+
+- [Installation](#installation)
+- [Multipass](#multipass)
+- [Networking](#networking)
+  * [References](#references)
+- [Storage](#storage)
+
+<!-- tocstop -->
+
+## Installation
 https://microk8s.io/docs/install-macos
 
 
-# Multipass
+## Multipass
 multipass set client.primary-name=microk8s-vm
 multipass list
 multipass shell
 
-# Networking
+## Networking
 ```
 → multipass shell
 ```
@@ -35,14 +48,14 @@ microk8s-vm             Running           192.168.64.4     Ubuntu 22.04 LTS
                                           10.1.254.64
 ```
 
-## References
+### References
 https://github.com/canonical/multipass/issues/2476#issuecomment-1063259237
 https://github.com/canonical/multipass/issues/2476#issuecomment-1437334269
 https://github.com/canonical/netplan/blob/main/examples/dhcp.yaml
 https://miniwebtool.com/mac-address-generator/
 
 
-# Storage
+## Storage
 https://multipass.run/docs/mount-command
 https://multipass.run/docs/improve-mount-performance#heading--nfs-mounts
 https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-volumes-example-nfs-persistent-volume.html

@@ -1,0 +1,18 @@
+---
+repos:
+- repo: meta
+  hooks:
+    - id: identity
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+    - id: check-case-conflict
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
+    - id: mixed-line-ending
+- repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+  rev: v1.1.2
+  hooks:
+    - id: markdown-toc
+      args: [-i]
+      files: ^README\.md$
