@@ -4,15 +4,19 @@ A useful guide for getting MicroK8s running on MacOS and allowing access to the 
 <!-- toc -->
 
 - [Installation](#installation)
+  * [References](#references)
 - [Multipass](#multipass)
 - [Networking](#networking)
-  * [References](#references)
+  * [References](#references-1)
 - [Storage](#storage)
+  * [References](#references-2)
 
 <!-- tocstop -->
 
 ## Installation
-https://microk8s.io/docs/install-macos
+
+### References
+- https://microk8s.io/docs/install-macos
 
 
 ## Multipass
@@ -51,14 +55,15 @@ microk8s-vm             Running           192.168.64.4     Ubuntu 22.04 LTS
 ```
 
 ### References
-https://github.com/canonical/multipass/issues/2476#issuecomment-1063259237
-https://github.com/canonical/multipass/issues/2476#issuecomment-1437334269
-https://github.com/canonical/netplan/blob/main/examples/dhcp.yaml
-https://miniwebtool.com/mac-address-generator/
+- https://github.com/canonical/multipass/issues/2476#issuecomment-1063259237
+- https://github.com/canonical/multipass/issues/2476#issuecomment-1437334269
+- https://github.com/canonical/netplan/blob/main/examples/dhcp.yaml
+- https://miniwebtool.com/mac-address-generator/
 
 
 ## Storage
-https://multipass.run/docs/mount-command
-https://multipass.run/docs/improve-mount-performance#heading--nfs-mounts
-https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-volumes-example-nfs-persistent-volume.html
-https://microk8s.io/docs/nfs
+### References
+- https://multipass.run/docs/mount-command
+- https://multipass.run/docs/improve-mount-performance#heading--nfs-mounts
+- https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-volumes-example-nfs-persistent-volume.html
+- https://microk8s.io/docs/nfs
