@@ -8,6 +8,7 @@ A useful guide for getting MicroK8s running on MacOS and allowing access to the 
 - [Multipass](#multipass)
 - [Networking](#networking)
   * [Add additional NIC for local network access](#add-additional-nic-for-local-network-access)
+  * [Configure new interface](#configure-new-interface)
   * [References](#references-1)
 - [Storage](#storage)
   * [References](#references-2)
@@ -65,6 +66,7 @@ microk8s-vm             Stopped           --               Ubuntu 22.04 LTS
 # start the instance
 $ multipass start microk8s-vm
 ```
+### Configure new interface
 * Enable DHCP on new interface
 ```
 # Connect to instance shell
