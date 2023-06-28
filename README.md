@@ -7,6 +7,7 @@ A useful guide for getting MicroK8s running on MacOS and allowing access to the 
   * [References](#references)
 - [Multipass](#multipass)
 - [Networking](#networking)
+  * [Add additional NIC for local network access](#add-additional-nic-for-local-network-access)
   * [References](#references-1)
 - [Storage](#storage)
   * [References](#references-2)
@@ -27,30 +28,70 @@ multipass shell
 ```
 
 ## Networking
+### Add additional NIC for local network access
+* Stop multipass VM and multipass
 ```
-→ multipass shell
+# stop the instance
+$ multipass stop microk8s-vm
+
+# stop multipass
+$ sudo launchctl unload /Library/LaunchDaemons/com.canonical.multipassd.plist
+
+# confirm multipass is stopped
+$ multipass list
+list failed: cannot connect to the multipass socket
 ```
+* Add an extra interface in `/var/root/Library/Application\ Support/multipassd/qemu/multipassd-vm-instances.json`
 ```
-ubuntu@microk8s-vm:~$ sudo -i
-root@microk8s-vm:~# cd /etc/netplan/
-root@microk8s-vm:/etc/netplan# vim enp0s2.yaml
-root@microk8s-vm:~# cat /etc/netplan/enp0s2.yaml
+        "extra_interfaces": [
+            {
+                "auto_mode": true,
+                "id": "en0",
+                "mac_address": "79:14:44:9d:89:2c"
+            }
+        ],
+```
+__NB:__ Make sure the MAC address is unique. Use [mac-address-generator](https://miniwebtool.com/mac-address-generator/) to generate one.
+* Start multipass and multipass VM
+```
+# start multipass
+$ sudo launchctl load /Library/LaunchDaemons/com.canonical.multipassd.plist
+
+# confirm multipass is started
+$ multipass list
+Name                    State             IPv4             Image
+microk8s-vm             Stopped           --               Ubuntu 22.04 LTS
+
+# start the instance
+$ multipass start microk8s-vm
+```
+* Enable DHCP on new interface
+```
+# Connect to instance shell
+$ multipass shell
+
+# Use ip command to find interface id. Mostly likely enp0s2
+ubuntu@microk8s-vm:~$ ip addr
+
+# Create netplan config for device
+ubuntu@microk8s-vm:~$ sudo vim /etc/netplan/enp0s2.yaml
+ubuntu@microk8s-vm:~$ cat /etc/netplan/enp0s2.yaml
 network:
   version: 2
   renderer: networkd
   ethernets:
     enp0s2:
       dhcp4: true
+
+# Apply the config
+ubuntu@microk8s-vm:~$ sudo netplan apply
 ```
+* Confirm new IP Address.
 ```
-microk8s stop
-microk8s start
-```
-```
-→ multipass list
+# multipass list
 Name                    State             IPv4             Image
-microk8s-vm             Running           192.168.64.4     Ubuntu 22.04 LTS
-                                          192.168.86.108
+microk8s-vm             Running           192.168.64.2     Ubuntu 22.04 LTS
+                                          <internal IP>
                                           10.1.254.64
 ```
 
